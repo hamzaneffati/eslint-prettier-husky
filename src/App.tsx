@@ -1,6 +1,8 @@
 import "./App.css";
-import { Home } from "./pages/Home";
+import { useRoutes } from "react-router-dom";
+import { routes } from "./routes";
 
 export const App = () => {
-  return <Home />;
+  const element = useRoutes(routes);
+  return <>{element}</>;
 };

@@ -1,9 +1,8 @@
-import { GET_COUNTRIES } from "../../graphql/queries";
-import { useGQLQuery } from "../../hooks/useGQLQuery";
+import { GET_COUNTRIES } from "../../../graphql/queries";
+import { useGQLQuery } from "../../../hooks/useGQLQuery";
 
 export const Home = () => {
   const { status, data } = useGQLQuery("countries", GET_COUNTRIES);
-  console.log("🚀 ~ file: Home.tsx ~ line 6 ~ Home ~ data", data);
 
   if (status === "loading") {
     return <>Loading 🐞 ...</>;
@@ -15,7 +14,7 @@ export const Home = () => {
   return (
     <>
       {data.countries.map((res: any) => (
-        <p>{res.name}</p>
+        <p key={res.name}>{res.name}</p>
       ))}
     </>
   );
