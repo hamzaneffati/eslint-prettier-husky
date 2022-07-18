@@ -1,9 +1,10 @@
 import { Outlet } from "react-router-dom";
+import { MenuDashboardComponent } from "../../../components/Menu";
 
 export const LayoutPrivate = () => {
   return (
     <div>
-      <h1>Header Private</h1>
+      <MenuDashboardComponent />
       <Outlet />
     </div>
   );

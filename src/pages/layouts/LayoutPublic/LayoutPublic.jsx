@@ -1,9 +1,10 @@
 import { Outlet } from "react-router-dom";
+import { MenuComponent } from "../../../components/Menu";
 
 export const LayoutPublic = () => {
   return (
     <div>
-      <h1>Header Public</h1>
+      <MenuComponent />
       <Outlet />
     </div>
   );
