@@ -1,0 +1,8 @@
+$titleColor: red;
+$titleWeight: 900;
+$titleFamily: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+
+@mixin titleStyle {
+  font-size: 36px;
+  font-family: $titleFamily;
+}
