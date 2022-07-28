@@ -1,11 +1,9 @@
 @import "../../../assets/styles/Global.scss";
 
-.title {
+.title-dashboard {
   text-align: center;
 }
 
-.country {
-  font-weight: $titleWeight;
-  color: $titleColor;
+.country-dashboard {
   @include titleStyle();
 }

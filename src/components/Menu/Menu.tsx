@@ -11,26 +11,35 @@ import {
   MenuItem,
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
-import AccountCircleIcon from "@mui/icons-material/AccountCircle";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useAuthStore } from "../../stores/auth.store";
 
 export const MenuComponent = () => {
   const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
-  const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
+  const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
+
+  const history = useNavigate();
+  const login = useAuthStore((state) => state.login);
+  const logout = useAuthStore((state) => state.logout);
+
+  const loginHandler = () => {
+    login();
+    history("/admin");
+  };
+
+  const logoutHandler = () => {
+    logout();
+    history("/");
+  };
 
   const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElNav(event.currentTarget);
-  };
-  const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
-    setAnchorElUser(event.currentTarget);
   };
 
   const handleCloseNavMenu = () => {
     setAnchorElNav(null);
   };
-  const handleCloseUserMenu = () => {
-    setAnchorElUser(null);
-  };
+
   return (
     <AppBar position="static">
       <Container maxWidth="xl">
@@ -114,57 +123,36 @@ export const MenuComponent = () => {
             >
               <Link to="/">Home</Link>
             </Button>
+            <Button
+              onClick={handleCloseNavMenu}
+              sx={{ my: 2, color: "white", display: "block" }}
+            >
+              <Link to="/">Nos Service</Link>
+            </Button>
+            <Button
+              onClick={handleCloseNavMenu}
+              sx={{ my: 2, color: "white", display: "block" }}
+            >
+              <Link to="/">Qui Somme Nous</Link>
+            </Button>
+            <Button
+              onClick={handleCloseNavMenu}
+              sx={{ my: 2, color: "white", display: "block" }}
+            >
+              <Link to="/">Contacter Nous</Link>
+            </Button>
           </Box>
 
           <Box sx={{ flexGrow: 0 }}>
-            <IconButton
-              size="large"
-              aria-label="account of current user"
-              aria-controls="menu-appbar"
-              aria-haspopup="true"
-              onClick={handleOpenUserMenu}
-              color="inherit"
-            >
-              <AccountCircleIcon />
-            </IconButton>
-            <Menu
-              sx={{ mt: "45px" }}
-              id="menu-appbar"
-              anchorEl={anchorElUser}
-              anchorOrigin={{
-                vertical: "top",
-                horizontal: "right",
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: "top",
-                horizontal: "right",
-              }}
-              open={Boolean(anchorElUser)}
-              onClose={handleCloseUserMenu}
-            >
-              <MenuItem onClick={handleCloseUserMenu}>
-                <Typography textAlign="center">
-                  <Link to="/admin">
-                    <span style={{ color: "black" }}>Dashboard</span>
-                  </Link>
-                </Typography>
-              </MenuItem>
-              <MenuItem onClick={handleCloseUserMenu}>
-                <Typography textAlign="center">
-                  <Link to="/admin/login">
-                    <span style={{ color: "black" }}>Login</span>
-                  </Link>
-                </Typography>
-              </MenuItem>
-              <MenuItem onClick={handleCloseUserMenu}>
-                <Typography textAlign="center">
-                  <Link to="/admin/register">
-                    <span style={{ color: "black" }}>Register</span>
-                  </Link>
-                </Typography>
-              </MenuItem>
-            </Menu>
+            {!isAuthenticated ? (
+              <Button onClick={loginHandler} style={{ color: "black" }}>
+                <Link to="/admin">Login</Link>
+              </Button>
+            ) : (
+              <Button onClick={logoutHandler} style={{ color: "black" }}>
+                <Link to="/">Logout</Link>
+              </Button>
+            )}
           </Box>
         </Toolbar>
       </Container>

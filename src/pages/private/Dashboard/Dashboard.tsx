@@ -1,8 +1,8 @@
 import { GET_COUNTRIES } from "../../../graphql/queries";
 import { useGQLQuery } from "../../../hooks/useGQLQuery";
-import "./Home.scss";
+import "./Dashboard.scss";
 
-export const Home = () => {
+export const Dashboard = () => {
   const { status, data } = useGQLQuery("countries", GET_COUNTRIES);
 
   if (status === "loading") {
@@ -14,8 +14,8 @@ export const Home = () => {
 
   return (
     <>
-      <h1 className="title">Home Page</h1>
-      <div className="country">
+      <h1 className="title-dashboard">Dashboard Page</h1>
+      <div className="country-dashboard">
         {data.countries.map((res: any) => (
           <p key={res.name}>{res.name}</p>
         ))}

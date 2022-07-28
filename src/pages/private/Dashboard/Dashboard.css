@@ -1,10 +1,8 @@
-.title {
+.title-dashboard {
   text-align: center;
 }
 
-.country {
-  font-weight: 900;
-  color: red;
+.country-dashboard {
   font-size: 36px;
   font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
-}/*# sourceMappingURL=Home.css.map */
+}/*# sourceMappingURL=Dashboard.css.map */
